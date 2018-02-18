@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+  <title>{{ title }} - DHCP Release Viewer</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="HTML-KickStart-master/css/kickstart.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="HTML-KickStart-master/js/kickstart.js"></script>
+  {% endblock %}
+</head>
+<body>
+  <div id="container">
+    <aside id="sidebar">
+      <ul class="navi">
+        <li class="current"><a href="#">IPv4 Lease</a></li>
+        <li><a href="#">IPv6 Lease</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </aside><!-- #sidebar -->
+    <main id="content">
+      <div class="container">
+        <h3>{{ title }}</h3>
+        <form action="status.cgi" method="get">
+          <label for="select1">Select Field</label>
+          <select id="select1" name="type">
+            <option>MAC Address</option>
+            <option>IP Address</option>
+            <option>FQDN Reverse</option>
+            <option>Subnet ID</option>
+            <option>FQDN Forward</option>
+            <option>Valid Lifetime</option>
+            <option>Hostname</option>
+            <option>State</option>
+            <option>Client ID</option>
+            <option>Lease Limit</option>
+          </select>
+          <input type="text" id="text2" name="text" placeholder="sss Text" />
+          <button class="blue">Search</button>
+        </form>
+        <br>
+        <table id="release" class="sortable">
+          <thead>
+            <tr>
+            {% for label in ['IPAddress', 'MACAddress', 'ClientID', 'ValidLifetime', 'LeaseLimit', 'SubnetID', 'FQDNForward', 'FQDNReverse', 'Hostname', 'State'] %}
+              <th>{{ label }}</th>
+            {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+          {% for i in range(0, 30) %}
+            <tr>
+            {% for j in range(0, 9) %}
+              <td>...</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+{#
+    while (my $ref = $sth->fetchrow_hashref) {
+
+      print "<tr>\n";
+
+      foreach my $key(keys %table_info) {
+        print "<td>".h($ref->{$key})."</td>\n";
+      }
+
+      print "</tr>\n";
+
+    }
+#}
+          </tbody>
+        </table>
+
+        {#
+        print 'No such data on table.'; 
+        #}
+
+      </div><!-- .container -->
+    </main><!-- #content -->
+  </div><!-- #container -->
+</body>
+</html>
