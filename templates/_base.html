@@ -15,67 +15,13 @@
 <body>
   <div id="container">
     <aside id="sidebar">
-    {% include('_navigation.html') %}
-    </aside><!-- #sidebar -->
+    {% block sidebar %}
+      {% include('_navigation.html') %}
+    {% endblock %}
+    </aside>
     <main id="content">
-      <div class="container">
-        <h3>{{ title }}</h3>
-        <form action="status.cgi" method="get">
-          <label for="select1">Select Field</label>
-          <select id="select1" name="type">
-            <option>MAC Address</option>
-            <option>IP Address</option>
-            <option>FQDN Reverse</option>
-            <option>Subnet ID</option>
-            <option>FQDN Forward</option>
-            <option>Valid Lifetime</option>
-            <option>Hostname</option>
-            <option>State</option>
-            <option>Client ID</option>
-            <option>Lease Limit</option>
-          </select>
-          <input type="text" id="text2" name="text" placeholder="sss Text" />
-          <button class="blue">Search</button>
-        </form>
-        <br>
-        <table id="release" class="sortable">
-          <thead>
-            <tr>
-            {% for label in ['IPAddress', 'MACAddress', 'ClientID', 'ValidLifetime', 'LeaseLimit', 'SubnetID', 'FQDNForward', 'FQDNReverse', 'Hostname', 'State'] %}
-              <th>{{ label }}</th>
-            {% endfor %}
-            </tr>
-          </thead>
-          <tbody>
-          {% for i in range(0, 30) %}
-            <tr>
-            {% for j in range(0, 9) %}
-              <td>...</td>
-            {% endfor %}
-            </tr>
-          {% endfor %}
-{#
-    while (my $ref = $sth->fetchrow_hashref) {
-
-      print "<tr>\n";
-
-      foreach my $key(keys %table_info) {
-        print "<td>".h($ref->{$key})."</td>\n";
-      }
-
-      print "</tr>\n";
-
-    }
-#}
-          </tbody>
-        </table>
-
-        {#
-        print 'No such data on table.'; 
-        #}
-
-      </div><!-- .container -->
-    </main><!-- #content -->
+    {% block content %} {% endblock %}
+    </main>
   </div><!-- #container -->
 </body>
 </html>
