@@ -16,7 +16,16 @@
   <div id="container">
     <aside id="sidebar">
     {% block sidebar %}
-      {% include('_navigation.html') %}
+      <ul class="navi">
+      {% for slug,label in navLabels %}
+        {% if slug == enableItem %}
+          <li class="active">
+        {% else %}
+          <li>
+        {% endif %}
+        <a href="?{{ slug }}">{{ label }}</a></li>
+      {% endfor %}
+      </ul>
     {% endblock %}
     </aside>
     <main id="content">
