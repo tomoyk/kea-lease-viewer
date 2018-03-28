@@ -11,18 +11,31 @@ $twig = new Twig_Environment($loader, [
 ]);
 
 // Menu settings
-$pages = ['IPv4 Lease', 'IPv6 Lease', 'About'];
 $pages = [
-  // Slug => Label
+  // Slug  => Label
   'v4'     => 'IPv4 Lease',
   'v6'     => 'IPv6 Lease',
-  'about'  => 'About'      
+  'about'  => 'About',
+  'search' => 'Search'
 ];
 
 if(isset($_GET['v4']) || isset($_GET['v6'])) {
 
-  $active = isset($_GET['v4']) ? 'v4' : 'v6';
+  try{
+
+    $db_user = 'kea';
+    $db_pass = 'password';
+    $dbh = new PDO('mysql:host=localhost;dbname=dhcpdb', $db_user, $db_pass);
+
+  } catch( PDOException $e ) {
+
+    echo "PDOException has occured.<br>\n";
+    echo "Error:: ".$e->getMessage()."<br>\n";
+    die();
+
+  }
   
+  $active = isset($_GET['v4']) ? 'v4' : 'v6';
   echo $twig->render('_ipTable.html', [
     'navLabels' => $pages,
     'enableItem' => $active
@@ -30,9 +43,15 @@ if(isset($_GET['v4']) || isset($_GET['v6'])) {
 
 } elseif(isset($_GET['about'])){
 
-  echo $twig->render('_base.html', [
+  echo $twig->render('about.html', [
     'navLabels' => $pages,
     'enableItem' => 'about'
   ]);
+
+} else {
+
+  // Redirect to v4 
+  $currentURL = (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+  header("Location: ${currentURL}?v4", true, 307);
 
 }

@@ -3,19 +3,19 @@
 {% block content %}
 <div class="container">
   <h3>{{ title }}</h3>
-  <form action="status.cgi" method="get">
+  <form action="search.php" method="get">
     <label for="select1">Select Field</label>
     <select id="select1" name="type">
-      <option>MAC Address</option>
-      <option>IP Address</option>
-      <option>FQDN Reverse</option>
-      <option>Subnet ID</option>
-      <option>FQDN Forward</option>
-      <option>Valid Lifetime</option>
-      <option>Hostname</option>
-      <option>State</option>
-      <option>Client ID</option>
-      <option>Lease Limit</option>
+      <option value="macaddr">MAC Address</option>
+      <option value="ipaddr">IP Address</option>
+      <option value="fqdnrev">FQDN Reverse</option>
+      <option value="subnet">Subnet ID</option>
+      <option value="fqdnfwd">FQDN Forward</option>
+      <option value="lifetime">Valid Lifetime</option>
+      <option value="hostname">Hostname</option>
+      <option value="state">State</option>
+      <option value="clientid">Client ID</option>
+      <option value="leaselimit">Lease Limit</option>
     </select>
     <input type="text" id="text2" name="text" placeholder="sss Text" />
     <button class="blue">Search</button>
